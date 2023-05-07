@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// hidden menu
+.close-menu {
+	display: none;
+	animation: 1s hideMenu forwards;
+}
+
+@keyframes hideMenu {
+	0% {
+		display: block;
+		height: 100%;
+	}
+	100% {
+		display: none;
+		height: 0;
+	}
+}
+
+// show menu
+.open-menu {
+	animation: 1s showMenu forwards;
+}
+
+@keyframes showMenu {
+	0% {
+		display: none;
+		height: 0;
+	}
+	100% {
+		display: block;
+		height: 100%;
+	}
+}
+
+.open-icon-menu {
+	animation: 1s rotateUp forwards;
+}
+
+@keyframes rotateUp {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-90deg);
+	}
+}
+
+.close-icon-menu {
+	animation: 1s rotateDown forwards;
+}
+
+@keyframes rotateDown {
+	0% {
+		transform: rotate(-90deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
