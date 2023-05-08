@@ -19,7 +19,10 @@ const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<div id='layout-wrapper' className='flex gap-4 min-h-screen'>
+			<div
+				id='layout-wrapper'
+				className='flex gap-4 min-h-screen bg-backgroundBody'
+			>
 				<Sidebar />
 				<main className='main-content'>
 					<Header />

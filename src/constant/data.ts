@@ -25,13 +25,13 @@ export const menuItems: IMenu[] = [
 		title: 'Contact',
 		subMenu: [
 			{
-				id: 1,
+				id: 3,
 				title: 'Facebook',
 				Icon: BiDollarCircle,
 				path: 'https://www.facebook.com/',
 			},
 			{
-				id: 2,
+				id: 4,
 				title: 'Instagram',
 				Icon: BiDollarCircle,
 				path: 'https://www.instagram.com/',

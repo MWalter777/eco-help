@@ -1,6 +1,6 @@
 import React from 'react';
-import { menuItems } from '@/constant/data';
-import SideMenu from './SideMenu';
+import Logo from '../assets/Logo';
+import SimpleMenu from './SimpleMenu';
 
 type Props = {
 	toggleSidebar?: () => void;
@@ -8,18 +8,16 @@ type Props = {
 
 const Sidebar = ({ toggleSidebar = () => {} }: Props) => {
 	return (
-		<div className='relative min-w-[200px] bg-red-800'>
+		<div className='relative min-w-[200px] bg-primary'>
 			<div className='fixed flex flex-col w-[200px]'>
 				<button
 					className='text-white min-h-[50px] w-full flex justify-center items-center'
 					onClick={toggleSidebar}
 				>
-					icon
+					<Logo className='icon-logo' width={200} height={50} />
 				</button>
-				<nav className='flex flex-col p-4 text-white bg-blue-900'>
-					{menuItems.map((item) => (
-						<SideMenu key={item.id} item={item} />
-					))}
+				<nav className='flex flex-col gap-2 p-4 text-text'>
+					<SimpleMenu />
 				</nav>
 			</div>
 		</div>
