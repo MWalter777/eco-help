@@ -76,7 +76,11 @@ const Salary = ({ handleSalary: setTotal }: Props) => {
 	};
 
 	return (
-		<div className='flex flex-col p-4 items-start gap-2'>
+		<div
+			className={`flex flex-col p-4 items-start gap-2 ${
+				isOpen ? 'h-full' : 'h-[60px]'
+			}`}
+		>
 			{error && (
 				<div className='bg-red-100 rounded-lg w-full flex justify-center py-1'>
 					<p className='text-red-500'>{error}</p>
@@ -133,25 +137,25 @@ const Salary = ({ handleSalary: setTotal }: Props) => {
 								/>
 							</div>
 					  ))}
+				<div className='flex gap-2'>
+					<input
+						type='checkbox'
+						checked={sameSalary}
+						name='equal_all_month'
+						id='equal_all_month'
+						onChange={toggleSameSalary}
+					/>
+					<label htmlFor='equal_all_month'>
+						Es el mismo para todos los meses
+					</label>
+				</div>
+				<button
+					onClick={calculate}
+					className='bg-focus text-white font-bold w-full py-1 rounded-lg hover:bg-other'
+				>
+					Calcular
+				</button>
 			</div>
-			<div className='flex gap-2'>
-				<input
-					type='checkbox'
-					checked={sameSalary}
-					name='equal_all_month'
-					id='equal_all_month'
-					onChange={toggleSameSalary}
-				/>
-				<label htmlFor='equal_all_month'>
-					Es el mismo para todos los meses
-				</label>
-			</div>
-			<button
-				onClick={calculate}
-				className='bg-focus text-white font-bold w-full py-1 rounded-lg hover:bg-other'
-			>
-				Calcular
-			</button>
 		</div>
 	);
 };

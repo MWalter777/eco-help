@@ -4,7 +4,7 @@
 
 // hidden menu
 .close-menu {
-	display: none;
+	overflow: hidden;
 	animation: 1s hideMenu forwards;
 }
 
@@ -35,6 +35,7 @@
 
 // show menu
 .open-menu {
+	overflow: hidden;
 	animation: 1s showMenu forwards;
 }
 

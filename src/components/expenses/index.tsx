@@ -12,16 +12,16 @@ type Props = {
 		fn: (props: Required<ExpensesType>) => Required<ExpensesType>
 	) => void;
 	expenses: {
+		schoolExpenses: number;
 		medicalExpenses: number;
 		otherExpenses: number;
-		schoolExpenses: number;
 	};
 };
 
 const initialExpenses: ExpensesType = {
 	medicalExpenses: undefined,
-	otherExpenses: undefined,
 	schoolExpenses: undefined,
+	otherExpenses: undefined,
 };
 
 const labels = {
@@ -54,9 +54,13 @@ const Expenses = ({ setExpenses, expenses }: Props) => {
 	};
 
 	return (
-		<div className='flex flex-col p-4 items-start h-full justify-between gap-2'>
+		<div
+			className={`flex flex-col p-4 items-start justify-between gap-2 ${
+				isOpen ? 'h-full' : 'h-[60px]'
+			}`}
+		>
 			<div className='w-full flex justify-between'>
-				<h1>Egresos</h1>
+				<h1>Egresos (800 max c/u)</h1>
 				<button
 					onClick={toggleSubMenu}
 					className='bg-focus w-7 h-7 flex justify-center items-center text-white rounded-full hover:bg-other'
