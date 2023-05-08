@@ -6,6 +6,7 @@ type Props = {
 	interestRate: number;
 	amount: number;
 	payment: number;
+	handleMonths: (months: any[]) => void;
 };
 
 const getMonths = (
@@ -38,21 +39,22 @@ const Details = ({
 	monthlyFee,
 	interestRate,
 	payment,
+	handleMonths,
 }: Props) => {
 	const [months, setMonths] = useState(() =>
 		getMonths(years, amount, monthlyFee, 1 + interestRate / 100 / 12, payment)
 	);
 	useEffect(() => {
-		if (payment > monthlyFee) {
-			setMonths(
-				getMonths(
-					years,
-					amount,
-					monthlyFee,
-					1 + interestRate / 100 / 12,
-					payment
-				)
+		if (payment >= monthlyFee) {
+			const m = getMonths(
+				years,
+				amount,
+				monthlyFee,
+				1 + interestRate / 100 / 12,
+				payment
 			);
+			setMonths(m);
+			handleMonths(m);
 		}
 	}, [payment]);
 	return (

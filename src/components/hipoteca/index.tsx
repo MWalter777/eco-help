@@ -1,10 +1,9 @@
 import { calculateMonthlyPayment } from '@/helpers/newHouse';
 import { Formik, Form, Field } from 'formik';
-import { useState } from 'react';
 import * as Yup from 'yup';
 import CustomField from '../customFields/CustomField';
 import { Result } from '../customFields/Result';
-import { AiOutlineRight } from 'react-icons/ai';
+import { ResultHipoteca } from '@/interfaces/ResultHipoteca';
 
 type InitialValues = {
 	amountSolicited: number;
@@ -49,31 +48,25 @@ const validationSchema = Yup.object({
 	monthlyPayment: Yup.number(),
 });
 
-type Result = {
-	amount: number;
-	interestRate: number;
-	monthlyPayment: number;
-	term: number;
-	totalInsurance: number;
-	showInterestRate: boolean;
-	monthlyFee: number;
+type Props = {
+	setResult: React.Dispatch<React.SetStateAction<ResultHipoteca>>;
+	result: ResultHipoteca;
+	payment: number;
+	handlePayment: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	years: number;
+	months: number;
+	totalAmount: number;
 };
 
-const initial: Result = {
-	amount: 0,
-	interestRate: 0,
-	monthlyPayment: 0,
-	term: 0,
-	totalInsurance: 0,
-	showInterestRate: false,
-	monthlyFee: 0,
-	years: 0,
-};
-
-const HipotecaForm = () => {
-	const [result, setResult] = useState<Result>(initial);
-
+const HipotecaForm = ({
+	result,
+	setResult,
+	payment,
+	handlePayment,
+	months,
+	totalAmount,
+	years,
+}: Props) => {
 	const onSubmit = (values: InitialValues) => {
 		const { amountFinanced, interest, monthly, totalInsurance, monthlyFee } =
 			calculateMonthlyPayment(values);
@@ -163,7 +156,14 @@ const HipotecaForm = () => {
 					)}
 				</Formik>
 			</div>
-			<Result {...result} />
+			<Result
+				{...result}
+				years={years}
+				months={months}
+				totalAmount={totalAmount}
+				payment={payment}
+				handlePayment={handlePayment}
+			/>
 		</div>
 	);
 };

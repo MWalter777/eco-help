@@ -11,23 +11,20 @@ type Props = {
 	showInterestRate: boolean;
 	monthlyFee: number;
 	years: number;
+	payment: number;
+	months: number;
+	totalAmount: number;
+	handlePayment: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Result = ({
 	amount,
-	interestRate,
-	monthlyPayment,
-	showInterestRate,
-	term,
-	totalInsurance,
-	monthlyFee,
+	payment,
+	years,
+	months,
+	totalAmount,
+	handlePayment,
 }: Props) => {
-	const [payment, setPayment] = useState<string>('');
-
-	const handlePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-		setPayment(value);
-	};
 	return (
 		<div className='w-full md:w-6/12 gap-2 text-text flex justify-between flex-wrap'>
 			<div className='md:w-6/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
@@ -53,7 +50,8 @@ export const Result = ({
 					>
 						<input
 							type='number'
-							value={monthlyPayment.toFixed(2)}
+							value={payment}
+							onChange={handlePayment}
 							className='bg-transparent outline-none flex justify-end w-6/12 md:w-10/12'
 							style={{ textAlign: 'end' }}
 						/>
@@ -67,7 +65,7 @@ export const Result = ({
 				<div className='flex flex-col justify-between items-end'>
 					<p className='text-text text-opacity-70'>Total a pagar</p>
 					<p className='text-2xl w-full rounded-lg font-semibold flex justify-center text-text'>
-						{inDollar(monthlyPayment * term * 12)}
+						{inDollar(totalAmount)}
 					</p>
 				</div>
 			</div>
@@ -78,7 +76,7 @@ export const Result = ({
 				<div className='flex flex-col justify-between items-end'>
 					<p className='text-text text-opacity-70'>Años</p>
 					<p className='text-2xl w-full rounded-lg flex justify-center text-text'>
-						{term}
+						{(years + months / 12).toFixed(0)}
 					</p>
 				</div>
 			</div>
