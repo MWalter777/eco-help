@@ -151,7 +151,7 @@ const Salary = ({ handleSalary: setTotal }: Props) => {
 				</div>
 				<button
 					onClick={calculate}
-					className='bg-focus text-white font-bold w-full py-1 rounded-lg hover:bg-other'
+					className='bg-focus text-white font-bold w-full py-1 rounded-lg hover:bg-other uppercase'
 				>
 					Calcular
 				</button>
