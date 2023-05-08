@@ -156,7 +156,7 @@ export const calculateFinal = ({
 		schoolExpenses;
 	const section = getFinalTax(preTax);
 	const applyTax =
-		(salary - section.about) * section.percentage + section.fixed;
+		(preTax - section.about) * section.percentage + section.fixed;
 	const total = preTax - applyTax;
 	return {
 		total: +total.toFixed(2),

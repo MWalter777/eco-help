@@ -109,7 +109,6 @@ const Salary = ({ handleSalary: setTotal }: Props) => {
 									name={key}
 									id={key}
 									onChange={handleSalary}
-									value={value.salary}
 									className='w-9/12 border-b border-b-focus border-opacity-25 outline-none bg-transparent'
 									placeholder={`${value.isExtra ? '' : 'Salario '}${
 										value.label
@@ -127,7 +126,6 @@ const Salary = ({ handleSalary: setTotal }: Props) => {
 									name={key}
 									id={key}
 									onChange={handleSalaryPerMonth}
-									value={value.salary}
 									className='w-9/12 border-b border-b-focus border-opacity-25 outline-none bg-transparent'
 									placeholder={`${value.isExtra ? '' : 'Salario de '}${
 										value.label

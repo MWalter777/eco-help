@@ -3,6 +3,7 @@ import Salary from '@/components/salary';
 import Layout from '@/layout';
 import { inDollar } from '@/helpers/parseDollar';
 import { calculateFinal } from '@/helpers/isr';
+import Expenses from '@/components/expenses';
 
 type SalaryType = {
 	total: number;
@@ -35,6 +36,11 @@ export default function Home() {
 		tax: 0,
 		salary: 0,
 	});
+	const [expenses, setExpenses] = useState({
+		medicalExpenses: 0,
+		otherExpenses: 0,
+		schoolExpenses: 0,
+	});
 
 	useEffect(() => {
 		const {
@@ -45,9 +51,9 @@ export default function Home() {
 			salary: salary.total,
 			aginaldo: salary.ag,
 			vacation: salary.va,
-			medicalExpenses: 0,
-			otherExpenses: 0,
-			schoolExpenses: 0,
+			medicalExpenses: expenses.medicalExpenses,
+			otherExpenses: expenses.otherExpenses,
+			schoolExpenses: expenses.schoolExpenses,
 		});
 		setIsrValue({ total, tax, salary: s });
 	}, [salary]);
@@ -57,7 +63,9 @@ export default function Home() {
 				<div className='w-6/12 bg-primary rounded-lg border-shadow'>
 					<Salary handleSalary={setSalary} />
 				</div>
-				<div className='w-6/12'></div>
+				<div className='w-6/12 bg-primary rounded-lg border-shadow'>
+					<Expenses expenses={expenses} setExpenses={setExpenses} />
+				</div>
 			</div>
 			<div className='w-full mt-4 rounded-lg bg-primary min-h-[100px] p-2 border-shadow'>
 				<table className='w-full border-collapse bg-white text-left text-sm text-gray-500'>
