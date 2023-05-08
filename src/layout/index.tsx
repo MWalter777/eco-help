@@ -21,7 +21,7 @@ const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
 			</Head>
 			<div
 				id='layout-wrapper'
-				className='flex gap-4 min-h-screen bg-backgroundBody'
+				className='flex gap-8 min-h-screen bg-backgroundBody'
 			>
 				<Sidebar />
 				<main className='main-content'>
