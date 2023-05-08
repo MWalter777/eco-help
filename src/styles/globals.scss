@@ -75,3 +75,22 @@
 		transform: rotate(0deg);
 	}
 }
+
+.remove-sidebar {
+	transition: 1s;
+	transform: translateX(-250px);
+	animation: 2.5s removeSidebar forwards;
+}
+
+.show-sidebar {
+	width: 275px;
+}
+
+@keyframes removeSidebar {
+	0% {
+		width: 250px;
+	}
+	100% {
+		width: 0;
+	}
+}

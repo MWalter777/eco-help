@@ -1,8 +1,6 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-import Header from './Header';
 import Sidebar from './Sidebar';
-import Footer from './Footer';
 
 type Props = {
 	children: ReactElement | ReactElement[];
@@ -11,6 +9,33 @@ type Props = {
 };
 
 const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
+	const ref = useRef<HTMLDivElement>(null);
+	const [open, setOpen] = useState('remove-sidebar');
+	const fn = (e: unknown) => {
+		const event = e as { target: { innerWidth: number } };
+		if (event.target.innerWidth < 768) {
+			setOpen('remove-sidebar');
+		} else setOpen('show-sidebar');
+	};
+
+	const toggleSidebar = () => {
+		if (open === 'remove-sidebar') {
+			setOpen('show-sidebar');
+		} else {
+			setOpen('remove-sidebar');
+		}
+	};
+	useEffect(() => {
+		if (window) {
+			fn({ target: { innerWidth: window.innerWidth } });
+			window.addEventListener('resize', fn);
+		}
+		return () => {
+			if (window) {
+				window.removeEventListener('resize', fn);
+			}
+		};
+	}, []);
 	return (
 		<>
 			<Head>
@@ -21,10 +46,14 @@ const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
 			</Head>
 			<div
 				id='layout-wrapper'
-				className='flex gap-4 min-h-screen bg-backgroundBody'
+				className='flex justify-start gap-4 min-h-screen bg-backgroundBody'
 			>
-				<Sidebar />
-				<main className='main-content p-4 overflow-hidden'>
+				<Sidebar toggleSidebar={toggleSidebar} open={open} />
+				<main
+					className={`main-content p-4 w-full overflow-x-hidden ${
+						open === 'remove-sidebar' && 'absolute -z-0 top-8'
+					}`}
+				>
 					<div className='page-content pr-4'>{children}</div>
 					{
 						//<Footer />
