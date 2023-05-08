@@ -32,12 +32,12 @@ export default function Home() {
 	return (
 		<Layout>
 			<div className='w-full flex gap-4 text-text'>
-				<div className='w-6/12 bg-primary rounded-lg'>
+				<div className='w-6/12 bg-primary rounded-lg border-shadow'>
 					<Salary handleSalary={setSalary} />
 				</div>
 				<div className='w-6/12'></div>
 			</div>
-			<div className='w-full mt-4 rounded-lg bg-primary min-h-[100px]'>
+			<div className='w-full mt-4 rounded-lg bg-primary min-h-[100px] p-2 border-shadow'>
 				<table className='w-full border-collapse bg-white text-left text-sm text-gray-500'>
 					<thead className='bg-gray-50'>
 						<tr>

@@ -25,7 +25,7 @@ const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
 			>
 				<Sidebar />
 				<main className='main-content p-4 w-full'>
-					<div className='page-content'>{children}</div>
+					<div className='page-content pr-4'>{children}</div>
 					<Footer />
 				</main>
 			</div>
