@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Salary from '@/components/salary';
 import Layout from '@/layout';
 import { inDollar } from '@/helpers/parseDollar';
+import { calculateFinal } from '@/helpers/isr';
 
 type SalaryType = {
 	total: number;
@@ -29,6 +30,27 @@ const initialSalary: SalaryType = {
 
 export default function Home() {
 	const [salary, setSalary] = useState<SalaryType>(initialSalary);
+	const [isrValue, setIsrValue] = useState({
+		total: 0,
+		tax: 0,
+		salary: 0,
+	});
+
+	useEffect(() => {
+		const {
+			total,
+			tax,
+			salary: s,
+		} = calculateFinal({
+			salary: salary.total,
+			aginaldo: salary.ag,
+			vacation: salary.va,
+			medicalExpenses: 0,
+			otherExpenses: 0,
+			schoolExpenses: 0,
+		});
+		setIsrValue({ total, tax, salary: s });
+	}, [salary]);
 	return (
 		<Layout>
 			<div className='w-full flex gap-4 text-text'>
@@ -134,33 +156,51 @@ export default function Home() {
 						</tr>
 						<tr className='hover:bg-blue-300 bg-blue-200'>
 							<td className='px-6 py-4'>Diferencia a calcular</td>
-							<td className='px-6 py-4'>{salary.ag}</td>
+							<td className='px-6 py-4'>{isrValue.salary}</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
 								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									0
+									{isrValue.tax}
 								</span>
 							</td>
 							<td className='px-6 py-4'>
 								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									{salary.ag}
+									{isrValue.total}
 								</span>
 							</td>
 						</tr>
-						<tr className='hover:bg-green-300 bg-green-200'>
-							<td className='px-6 py-4'>Renta a pagar/cobrar</td>
-							<td className='px-6 py-4'>{salary.ag}</td>
+						<tr
+							className={`${
+								isrValue.tax > salary.totalTax
+									? 'hover:bg-red-300 bg-red-200'
+									: 'hover:bg-green-300 bg-green-200'
+							}`}
+						>
+							<td className='px-6 py-4'>
+								{isrValue.tax > salary.totalTax
+									? 'Renta a pagar aprox.'
+									: 'Renta que devolveran aprox.'}
+							</td>
+							<td className='px-6 py-4'>
+								{inDollar(salary.total - isrValue.salary)}
+							</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									0
+								<span
+									className={`${
+										isrValue.tax > salary.totalTax
+											? 'bg-red-500'
+											: 'bg-green-300'
+									} text-white font-bold w-24 flex justify-center rounded-lg`}
+								>
+									{inDollar(Math.abs(isrValue.tax - salary.totalTax))}
 								</span>
 							</td>
 							<td className='px-6 py-4'>
 								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									{salary.ag}
+									{inDollar(salary.total - isrValue.total)}
 								</span>
 							</td>
 						</tr>
