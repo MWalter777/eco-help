@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Salary from '@/components/salary';
 import Layout from '@/layout';
+import { inDollar } from '@/helpers/parseDollar';
 
 type SalaryType = {
 	total: number;
@@ -70,12 +71,12 @@ export default function Home() {
 										<td className='px-6 py-4'>{isss}</td>
 										<td className='px-6 py-4'>{afp}</td>
 										<td className='px-6 py-4'>
-											<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+											<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 												{tax}
 											</span>
 										</td>
 										<td className='px-6 py-4'>
-											<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+											<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 												{neto}
 											</span>
 										</td>
@@ -89,12 +90,12 @@ export default function Home() {
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									0
 								</span>
 							</td>
 							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									{salary.va}
 								</span>
 							</td>
@@ -105,29 +106,29 @@ export default function Home() {
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									0
 								</span>
 							</td>
 							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									{salary.ag}
 								</span>
 							</td>
 						</tr>
 						<tr className='hover:bg-yellow-300 bg-yellow-200'>
-							<td className='px-6 py-4'>Total Pagado/Ganado</td>
-							<td className='px-6 py-4'>{salary.ag}</td>
+							<td className='px-6 py-4'>Total Pagado</td>
+							<td className='px-6 py-4'>{salary.total}</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
-									0
+								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
+									{inDollar(salary.totalTax)}
 								</span>
 							</td>
 							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
-									{salary.ag}
+								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
+									{inDollar(salary.totalNeto)}
 								</span>
 							</td>
 						</tr>
@@ -137,12 +138,12 @@ export default function Home() {
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									0
 								</span>
 							</td>
 							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									{salary.ag}
 								</span>
 							</td>
@@ -153,12 +154,12 @@ export default function Home() {
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
-								<span className='bg-blue-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									0
 								</span>
 							</td>
 							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-20 flex justify-center rounded-lg'>
+								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
 									{salary.ag}
 								</span>
 							</td>
