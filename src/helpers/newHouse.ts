@@ -73,8 +73,8 @@ const findInterest = (props: {
 }) => {
 	const { monthly, amountFinanced, term } = props;
 	const interestOptions = Array.from(
-		{ length: 900 },
-		(_, i) => Math.round((10 - i * 0.01) * 100) / 100
+		{ length: 1900 },
+		(_, i) => Math.round((20 - i * 0.01) * 100) / 100
 	);
 	const monthlies = interestOptions.map((interest) => {
 		const interestRate = interest / (12 * 100);

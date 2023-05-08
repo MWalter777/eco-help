@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { inDollar } from '@/helpers/parseDollar';
 import { BiDollar, BiBuildingHouse, BiMoney, BiCalendar } from 'react-icons/bi';
 
@@ -27,6 +26,13 @@ export const Result = ({
 }: Props) => {
 	return (
 		<div className='w-full md:w-6/12 gap-2 text-text flex justify-between flex-wrap'>
+			<div className='w-full bg-primary rounded-lg p-2'>
+				<h1>
+					Modifique su cuota (el campo donde aparece su cueta es editable),
+					agregando a capital para tardar menos años en pagar la deuda y pagar
+					menos intereses.
+				</h1>
+			</div>
 			<div className='md:w-6/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
 				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-orange-500'>
 					<BiBuildingHouse className='text-4xl' />
@@ -42,13 +48,17 @@ export const Result = ({
 				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-blue-500'>
 					<BiDollar className='text-4xl' />
 				</div>
-				<div className='flex flex-col max-w-full justify-between items-end'>
-					<p className='text-text text-opacity-70'>Cuota</p>
+				<div className='hover:cursor-pointer flex flex-col max-w-full justify-between items-end'>
+					<label htmlFor='payment' className='text-text text-opacity-70'>
+						Cuota
+					</label>
 					<p
 						className='text-2xl rounded-lg font-semibold flex justify-end text-text'
 						style={{ width: '100%' }}
 					>
 						<input
+							id='payment'
+							name='payment'
 							type='number'
 							value={payment}
 							onChange={handlePayment}
