@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { inDollar } from '@/helpers/parseDollar';
-import { useState, useEffect } from 'react';
-import Details from './Details';
+import { BiDollar, BiBuildingHouse, BiMoney, BiCalendar } from 'react-icons/bi';
 
 type Props = {
 	amount: number;
@@ -22,79 +22,66 @@ export const Result = ({
 	totalInsurance,
 	monthlyFee,
 }: Props) => {
-	const [showDetails, setShowDetails] = useState(false);
 	const [payment, setPayment] = useState<string>('');
-
-	useEffect(() => {
-		setPayment(monthlyPayment.toFixed(2));
-	}, [monthlyPayment]);
 
 	const handlePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setPayment(value);
 	};
 	return (
-		<div className={`flex-col ${monthlyPayment > 0 ? 'flex' : 'hidden'}`}>
-			<div className='border border-gray-500 rounded-md p-2 gap-1 bg-gray-200 mt-4 flex flex-col items-center'>
-				<h3>Cantidad financiada</h3>
-				<h1 className='font-bold text-3xl'>{inDollar(amount)}</h1>
-				<p>
-					Interes Anual
-					{interestRate > 0 ? (
-						<span className='font-bold'> {interestRate}%</span>
-					) : (
-						<span className='text-red-700'>
-							No hay interes valido para esa cantidad
-						</span>
-					)}
-					{!showInterestRate && (
-						<span className='text-red-700'>
-							{interestRate >= 10 &&
-								`Corre de ahi, seguramente no te querian decir la tasa de interes (mayor a ${interestRate} ni siquiera la he calculado, es mayor a esta candidad por lo tanto es una estafa) por que te estan robando! con este interes ni vendiendo todos tus organos vas a terminar de pagarlos en tu vida!`}
-							{interestRate === 0 && ' seguramente es una estafa'}
-						</span>
-					)}
-				</p>
-				<h3>Cuota mensual</h3>
-				<h1 className='font-bold text-xl'>{inDollar(monthlyPayment)}</h1>
-				<h3>Pago mensual + capital</h3>
-				<input
-					className='px-3 pt-1 rounded-md w-fit'
-					type='number'
-					value={payment}
-					onChange={handlePayment}
-				/>
-				<h3>Cuota mensual sin seguro</h3>
-				<h1 className='font-bold text-xl'>{inDollar(monthlyFee)}</h1>
-				<p>
-					Plazo <span>{term}</span> años
-				</p>
-				<p>
-					Total Seguro{' '}
-					<span className='font-bold'>{(totalInsurance * 100).toFixed()}%</span>
-				</p>
-				<p>
-					Total a pagar{' '}
-					<span className='font-bold'>
-						{inDollar(monthlyPayment * term * 12)}
-					</span>
-				</p>
+		<div className='w-full md:w-6/12 gap-2 text-text flex justify-between flex-wrap'>
+			<div className='md:w-6/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
+				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-orange-500'>
+					<BiBuildingHouse className='text-4xl' />
+				</div>
+				<div className='flex flex-col justify-between items-end'>
+					<p className='text-text text-opacity-70'>A financiar</p>
+					<p className='text-2xl w-full rounded-lg flex justify-center text-text'>
+						{inDollar(amount)}
+					</p>
+				</div>
 			</div>
-			<button
-				className='bg-green-700 text-white py-2 rounded-md mt-3 w-full'
-				onClick={() => setShowDetails(!showDetails)}
-			>
-				Detalles
-			</button>
-			{showDetails && (
-				<Details
-					amount={amount}
-					interestRate={interestRate}
-					monthlyFee={monthlyFee}
-					years={term}
-					payment={+payment - monthlyFee * totalInsurance}
-				/>
-			)}
+			<div className='md:w-5/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
+				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-blue-500'>
+					<BiDollar className='text-4xl' />
+				</div>
+				<div className='flex flex-col max-w-full justify-between items-end'>
+					<p className='text-text text-opacity-70'>Cuota</p>
+					<p
+						className='text-2xl rounded-lg font-semibold flex justify-end text-text'
+						style={{ width: '100%' }}
+					>
+						<input
+							type='number'
+							value={monthlyPayment.toFixed(2)}
+							className='bg-transparent outline-none flex justify-end w-6/12 md:w-10/12'
+							style={{ textAlign: 'end' }}
+						/>
+					</p>
+				</div>
+			</div>
+			<div className='md:w-6/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
+				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-red-500'>
+					<BiMoney className='text-4xl' />
+				</div>
+				<div className='flex flex-col justify-between items-end'>
+					<p className='text-text text-opacity-70'>Total a pagar</p>
+					<p className='text-2xl w-full rounded-lg font-semibold flex justify-center text-text'>
+						{inDollar(monthlyPayment * term * 12)}
+					</p>
+				</div>
+			</div>
+			<div className='md:w-5/12 w-full h-20 justify-center mt-6 relative flex flex-col items-end bg-primary rounded-lg p-2'>
+				<div className='flex justify-center items-center absolute left-4 h-[60px] -top-6 text-white px-4 rounded-lg bg-yellow-500'>
+					<BiCalendar className='text-4xl' />
+				</div>
+				<div className='flex flex-col justify-between items-end'>
+					<p className='text-text text-opacity-70'>Años</p>
+					<p className='text-2xl w-full rounded-lg flex justify-center text-text'>
+						{term}
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 };
