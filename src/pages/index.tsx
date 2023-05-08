@@ -140,7 +140,9 @@ export default function Home() {
 						</tr>
 						<tr className='hover:bg-yellow-300 bg-yellow-200'>
 							<td className='px-6 py-4'>Total Pagado</td>
-							<td className='px-6 py-4'>{salary.total}</td>
+							<td className='px-6 py-4'>
+								{salary.total + salary.ag + salary.va}
+							</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
@@ -156,17 +158,19 @@ export default function Home() {
 						</tr>
 						<tr className='hover:bg-blue-300 bg-blue-200'>
 							<td className='px-6 py-4'>Diferencia a calcular</td>
-							<td className='px-6 py-4'>{isrValue.salary}</td>
+							<td className='px-6 py-4'>
+								{isrValue.salary + salary.ag + salary.va}
+							</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>0</td>
 							<td className='px-6 py-4'>
 								<span className='bg-blue-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									{isrValue.tax}
+									{inDollar(isrValue.tax)}
 								</span>
 							</td>
 							<td className='px-6 py-4'>
 								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									{isrValue.total}
+									{inDollar(isrValue.total)}
 								</span>
 							</td>
 						</tr>
@@ -198,11 +202,7 @@ export default function Home() {
 									{inDollar(Math.abs(isrValue.tax - salary.totalTax))}
 								</span>
 							</td>
-							<td className='px-6 py-4'>
-								<span className='bg-green-400 text-white font-bold w-24 flex justify-center rounded-lg'>
-									{inDollar(salary.total - isrValue.total)}
-								</span>
-							</td>
+							<td className='px-6 py-4'></td>
 						</tr>
 					</tbody>
 				</table>
