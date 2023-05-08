@@ -61,7 +61,7 @@ const getTax = (preTax: number) => {
 	);
 };
 
-const calculate = (salary: number) => {
+export const calculate = (salary: number) => {
 	const ISSS = salary > 1000 ? 30 : salary * isss;
 	const AFP = salary * afp;
 	const preTax = salary - AFP - ISSS;

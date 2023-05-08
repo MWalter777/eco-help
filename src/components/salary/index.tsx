@@ -9,7 +9,16 @@ type KeyMonth = keyof typeof MONTHS;
 type Props = {
 	handleSalary: (props: {
 		total: number;
-		mensual: number[];
+		mensual: {
+			label: string;
+			total: number;
+			isss: number;
+			afp: number;
+			tax: number;
+			salary: number;
+		}[];
+		totalTax: number;
+		totalNeto: number;
 		ag: number;
 		va: number;
 	}) => void;
