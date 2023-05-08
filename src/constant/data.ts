@@ -1,5 +1,6 @@
 import { IMenu } from '@/interfaces/Menu';
 import { BiDollarCircle } from 'react-icons/bi';
+import { MdFeed } from 'react-icons/md';
 
 export const menuItems: IMenu[] = [
 	{
@@ -8,8 +9,8 @@ export const menuItems: IMenu[] = [
 		subMenu: [
 			{
 				id: 1,
-				title: 'Home',
-				Icon: BiDollarCircle,
+				title: 'Simple ISR',
+				Icon: MdFeed,
 				path: '/',
 			},
 			{
