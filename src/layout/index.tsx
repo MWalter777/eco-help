@@ -24,7 +24,7 @@ const Layout = ({ children, title = 'Eco help', content = '' }: Props) => {
 				className='flex gap-4 min-h-screen bg-backgroundBody'
 			>
 				<Sidebar />
-				<main className='main-content p-4 w-full'>
+				<main className='main-content p-4 overflow-hidden'>
 					<div className='page-content pr-4'>{children}</div>
 					{
 						//<Footer />
